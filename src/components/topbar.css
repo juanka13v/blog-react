@@ -12,6 +12,7 @@
     font-family: 'Josefin Sans', sans-serif;
     display: flex;
     align-items: center;
+    z-index: 999;
 }
 
 .topLeft, .topRight {
