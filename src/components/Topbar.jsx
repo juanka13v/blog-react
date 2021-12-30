@@ -1,8 +1,10 @@
 import React from "react";
 import "./topbar.css";
-import imgTop from "../images/Mi-foto.png"
+import imgTop from "../images/Mi-foto.png";
+import { Link } from "react-router-dom";
 
 const Topbar = () => {
+  const currentUser = false;
   return (
     <div className="top">
       <div className="topLeft">
@@ -12,17 +14,70 @@ const Topbar = () => {
         <i className="topIcon fab fa-instagram-square"></i>
       </div>
       <div className="topCenter">
-          <div className="topList">
-              <li className="topListItem">HOME</li>
-              <li className="topListItem">ABOUT</li>
-              <li className="topListItem">CONTACT</li>
-              <li className="topListItem">WRITE</li>
-              <li className="topListItem">LOGOUT</li>
-          </div>
+        <div className="topList">
+          <li className="topListItem">
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              Home
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link
+              to="/about"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              About
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link
+              to="/contact"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Contact
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link
+              to="/write"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Write
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link
+              to="/logout"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              {currentUser ? "" : "LogOut"}
+            </Link>
+          </li>
+        </div>
       </div>
       <div className="topRight">
+        {currentUser ? (
           <img src={imgTop} alt="" className="topImg" />
-          <i className="topSearchIcon fas fa-search"></i>
+        ) : (
+          <ul className="topList">
+            <li className="topListItem">
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                Login
+              </Link>
+            </li>
+            <li className="topListItem">
+              <Link
+                to="/register"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                Register
+              </Link>
+            </li>
+          </ul>
+        )}
+        <i className="topSearchIcon fas fa-search"></i>
       </div>
     </div>
   );
