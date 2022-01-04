@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 import SinglePost from "./components/SinglePost";
+import "./app.css"
 
 function App() {
   const currentUser = false;

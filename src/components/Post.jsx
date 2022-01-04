@@ -1,26 +1,30 @@
-import React from 'react'
-import './post.css'
-import postImg from '../images/post-img.jpg' 
+import React from "react";
+import "./post.css";
+import { Link } from "react-router-dom";
 
-const Post = () => {
-    return (
-        <div className='post'>
-            <img src={postImg} alt="" className='postImg'/>
-            <div className="postInfo">
-                <div className="postCats">
-                    <span className="postCat">Music</span>
-                    <span className="postCat">Life</span>
-                </div>
-                <span className="postTitle">
-                    Lorem ipsum dolor sit amet.
-                </span>
-                <span className="postDate">1 hour ago</span>
-            </div>
-            <p className='postDesc'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quasi libero laudantium fuga sint voluptas unde impedit ea harum vero numquam hic aliquam reprehenderit animi ipsum, corporis quidem optio aspernatur!
-            </p>
+const Post = ({ post }) => {
+  return (
+    <div className="post">
+      {post.photo && <img src={post.photo} alt="" className="postImg" />}
+      <div className="postInfo">
+        <div className="postCats">
+          {post.categories.map((cat) => {
+            <span className="postCat">{cat.name}</span>;
+          })}
         </div>
-    )
-}
+        <Link
+          to={`/post/${post._id}`}
+          className="link"
+        >
+          <span className="postTitle">{post.title}</span>
+        </Link>
+        <span className="postDate">
+          {new Date(post.createdAt).toDateString()}
+        </span>
+      </div>
+      <p className="postDesc">{post.desc}</p>
+    </div>
+  );
+};
 
-export default Post
+export default Post;

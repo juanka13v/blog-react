@@ -1,12 +1,24 @@
 import "./sidebar.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import imgAbout from "../images/about-me-photo.jpg";
 
 const Sidebar = () => {
+  const [cats, setCats] = useState([]);
+  const url = "https://rest-api-blogs-2021.herokuapp.com/api";
+
+  useEffect(() => {
+    const getCats = async () => {
+      const res = await axios.get(`${url}/categories`);
+      setCats(res.data);
+    };
+    getCats();
+  }, []);
   return (
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
-        <img src={imgAbout} alt="" className="img-sidebar"/>
+        <img src={imgAbout} alt="" className="img-sidebar" />
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
           Necessitatibus excepturi consequuntur culpa est quis suscipit
@@ -16,12 +28,9 @@ const Sidebar = () => {
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          <li className="sidebarListItem">Life</li>
-          <li className="sidebarListItem">Music</li>
-          <li className="sidebarListItem">Style</li>
-          <li className="sidebarListItem">Sport</li>
-          <li className="sidebarListItem">Tech</li>
-          <li className="sidebarListItem">Cinema</li>
+          {cats.map((category, index) => {
+            return <li className="sidebarListItem" key={index}>{category.name}</li>;
+          })}
         </ul>
       </div>
       <div className="sidebarItem">
